@@ -25,40 +25,21 @@
     }
 </script>
 
-<style>
-    @font-face {
-        font-family: "Roboto";
-        src: url("assets/Roboto-Regular.ttf") format("truetype");
-    }
-
-    .tab .header {
-        color: white;
-        font-family: 'Roboto';
-        font-weight: bold;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-align: center;
-    }
-</style>
-
 <body>
-    <div class="tab">
+    <div class="navigation">
         <div class="header">MENU</div>
         <div class="menu">
-            <button class="btn" onclick="pictureChange1()">
-                <img class="active" id="home" src="assets/img/homeactive.png" alt=""
-                    style="width:40%; padding-bottom: 2px;"><br>
-                HOME
+            <button onclick="pictureChange1()">
+                <img class="active" id="home" src="assets/img/homeactive.png" />
+                <div>HOME</div>
             </button>
-            <button class="btn" onclick="pictureChange2()">
-                <img id="requests" src="assets/img/requestinactive.png" alt=""
-                    style="width:40%; padding-bottom: 2px;"><br>
-                REQUESTS
+            <button onclick="pictureChange2()">
+                <img id="requests" src="assets/img/requestinactive.png" />
+                <div>REQUESTS</div>
             </button>
-            <button class="btn" onclick="pictureChange3()">
-                <img id="volunteer" src="assets/img/volunteerinactive.png" alt=""
-                    style="width:40%; padding-bottom: 2px;"><br>
-                VOLUNTEERS
+            <button onclick="pictureChange3()">
+                <img id="volunteer" src="assets/img/volunteerinactive.png" />
+                <div>VOLUNTEERS</div>
             </button>
         </div>
     </div>

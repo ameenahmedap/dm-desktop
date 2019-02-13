@@ -8,40 +8,37 @@
 </head>
 
 <script>
-    function pictureChange1()
-    {
-    document.getElementById('home').src="assets/img/homeactive.png";
-    document.getElementById('requests').src="assets/img/requestinactive.png";
-    document.getElementById('volunteer').src="assets/img/volunteerinactive.png";
+    function pictureChange1() {
+        document.getElementById('home').src = "assets/img/homeactive.png";
+        document.getElementById('requests').src = "assets/img/requestinactive.png";
+        document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
     }
-    function pictureChange2()
-    {
-    document.getElementById('home').src="assets/img/homeinactive.png";
-    document.getElementById('requests').src="assets/img/requestactive.png";
-    document.getElementById('volunteer').src="assets/img/volunteerinactive.png";
+    function pictureChange2() {
+        document.getElementById('home').src = "assets/img/homeinactive.png";
+        document.getElementById('requests').src = "assets/img/requestactive.png";
+        document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
     }
-    function pictureChange3()
-    {
-    document.getElementById('home').src="assets/img/homeinactive.png";
-    document.getElementById('requests').src="assets/img/requestinactive.png";
-    document.getElementById('volunteer').src="assets/img/volunteeractive.png";
+    function pictureChange3() {
+        document.getElementById('home').src = "assets/img/homeinactive.png";
+        document.getElementById('requests').src = "assets/img/requestinactive.png";
+        document.getElementById('volunteer').src = "assets/img/volunteeractive.png";
     }
 </script>
 
 <style>
     @font-face {
-    font-family:"Roboto";
-    src: url("assets/Roboto-Regular.ttf") format("truetype");
-  }
-  .tab .header{
-    color: white;
-    font-family: 'Roboto';
-    font-weight: bold;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-}
+        font-family: "Roboto";
+        src: url("assets/Roboto-Regular.ttf") format("truetype");
+    }
 
+    .tab .header {
+        color: white;
+        font-family: 'Roboto';
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+    }
 </style>
 
 <body>
@@ -49,15 +46,18 @@
         <div class="header">MENU</div>
         <div class="menu">
             <button class="btn" onclick="pictureChange1()">
-                <img class="active" id="home" src="assets/img/homeactive.png" alt="" style="width:40%; padding-bottom: 2px;"><br>
+                <img class="active" id="home" src="assets/img/homeactive.png" alt=""
+                    style="width:40%; padding-bottom: 2px;"><br>
                 HOME
             </button>
             <button class="btn" onclick="pictureChange2()">
-                <img id="requests" src="assets/img/requestinactive.png" alt="" style="width:40%; padding-bottom: 2px;"><br>
+                <img id="requests" src="assets/img/requestinactive.png" alt=""
+                    style="width:40%; padding-bottom: 2px;"><br>
                 REQUESTS
             </button>
             <button class="btn" onclick="pictureChange3()">
-                <img id="volunteer" src="assets/img/volunteerinactive.png" alt="" style="width:40%; padding-bottom: 2px;"><br>
+                <img id="volunteer" src="assets/img/volunteerinactive.png" alt=""
+                    style="width:40%; padding-bottom: 2px;"><br>
                 VOLUNTEERS
             </button>
         </div>

@@ -3,46 +3,93 @@
 
 <head>
     <title>Control Panel</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-
 <script>
-    function pictureChange1() {
-        document.getElementById('home').src = "assets/img/homeactive.png";
-        document.getElementById('requests').src = "assets/img/requestinactive.png";
-        document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
-    }
-    function pictureChange2() {
-        document.getElementById('home').src = "assets/img/homeinactive.png";
-        document.getElementById('requests').src = "assets/img/requestactive.png";
-        document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
-    }
-    function pictureChange3() {
-        document.getElementById('home').src = "assets/img/homeinactive.png";
-        document.getElementById('requests').src = "assets/img/requestinactive.png";
-        document.getElementById('volunteer').src = "assets/img/volunteeractive.png";
-    }
+function pictureChange1() {
+    document.getElementById('home').src = "assets/img/homeactive.png";
+    document.getElementById('requests').src = "assets/img/requestinactive.png";
+    document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
+}
+function pictureChange2() {
+    document.getElementById('home').src = "assets/img/homeinactive.png";
+    document.getElementById('requests').src = "assets/img/requestactive.png";
+    document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
+}
+function pictureChange3() {
+    document.getElementById('home').src = "assets/img/homeinactive.png";
+    document.getElementById('requests').src = "assets/img/requestinactive.png";
+    document.getElementById('volunteer').src = "assets/img/volunteeractive.png";
+}
+function date_time(id)
+{
+        date = new Date;
+        days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+        months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+        year = date.getFullYear();
+        month = date.getMonth();
+        d = date.getDate();
+        day = date.getDay();
+        m = date.getMinutes();
+        s = date.getSeconds();
+        ampm = "AM";
+        h = date.getHours();
+        if(h>12)
+        {
+        		h = h-12;
+                ampm="PM"
+        }
+        h = checkTime(h);
+        m = checkTime(m);
+        s = checkTime(s);
+        function checkTime(i) {
+            if (i < 10) {i = "0" + i};  
+            return i;
+        }
+        result = ''+days[day]+', '+d+' '+months[month]+' '+year+' '+h+':'+m+':'+s+" "+ampm;
+        document.getElementById(id).innerHTML = result;
+        setTimeout('date_time("'+id+'");','1000');
+        return true;
+}
 </script>
-
 <body>
-    <div class="navigation">
-        <div class="header">MENU</div>
-        <div class="menu">
-            <button onclick="pictureChange1()">
-                <img class="active" id="home" src="assets/img/homeactive.png" />
-                <div>HOME</div>
-            </button>
-            <button onclick="pictureChange2()">
-                <img id="requests" src="assets/img/requestinactive.png" />
-                <div>REQUESTS</div>
-            </button>
-            <button onclick="pictureChange3()">
-                <img id="volunteer" src="assets/img/volunteerinactive.png" />
-                <div>VOLUNTEERS</div>
-            </button>
+    <div class="grid-container">
+        <div class="header">
+            MENU
+            <div class="menu">
+                <button onclick="pictureChange1()">
+                    <img class="active" id="home" src="assets/img/homeactive.png" />
+                    <div>HOME</div>
+                </button>
+                <button onclick="pictureChange2()">
+                    <img id="requests" src="assets/img/requestinactive.png" />
+                    <div>REQUESTS</div>
+                </button>
+                <button onclick="pictureChange3()">
+                    <img id="volunteer" src="assets/img/volunteerinactive.png" />
+                    <div>VOLUNTEERS</div>
+                </button>
+            </div>
+        </div>
+        <div class="homeheader">
+            <span id="date_time"></span>
+            <script type="text/javascript">window.onload = date_time('date_time');</script>
+        </div>
+        <div class="homeleft">
+            <h4 style="color: #e74c3c";>Requests Recieved</h4>
+            <p>600 <img src="assets/img/homerequest.png" style="width:45px";></p>
+        </div>
+        <div class="homemain">
+            <h4 style="color: #e74c3c";>Requests Processing</h4>
+            <p>200 <img src="assets/img/homerequest.png" style="width:45px";></p>
+        </div>
+        <div class="homeright">
+            <h4 style="color: #e74c3c";>Requests Completed</h4>
+            <p>400 <img src="assets/img/homerequest.png" style="width:45px";></p>
         </div>
     </div>
+    
 </body>
 
 </html>

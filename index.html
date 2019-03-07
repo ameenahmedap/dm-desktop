@@ -49,27 +49,29 @@ function time(id) {
     setTimeout('time("'+id+'");','1000');
     return true;
 }
-function date(id) {
-    date = new Date;
+function todaydate(id) {
+    today = new Date;
     days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
-    year = date.getFullYear();
-    month = date.getMonth();
-    d = date.getDate();
-    day = date.getDay();
+    year = today.getFullYear();
+    month = today.getMonth();
+    d = today.getDate();
+    day = today.getDay();
     result = ''+days[day]+', '+d+' '+months[month]+' '+year;
     document.getElementById(id).innerHTML = result;
-    setTimeout('date("'+id+'");','1000');
+    setTimeout('todaydate("'+id+'");','1000');
     return true;
 }
 </script>
 <body>
     <div class="header">
         <div class="header1">
+            <div><img src="assets/img/icons8-calendar-1-40.png" width="30px"></div>
             <span id="date"></span>
-            <script type="text/javascript">window.onload = date('date');</script>
+            <script type="text/javascript">window.onload = todaydate('date');</script>
         </div>
         <div class="header2">
+            <div><img src="assets/img/icons8-clock-40.png" width="30px"></div>
             <span id="time"></span>
             <script type="text/javascript">window.onload = time('time');</script>
         </div>
@@ -94,7 +96,14 @@ function date(id) {
         <div id="homecontents">
             <div class="col-25">
                 <h4 style="color: #e74c3c" ;>Requests Recieved</h4>
-                <p>700 <img src="assets/img/homerequest.png" style="width:45px" ;></p>
+                <p>
+                    <script>
+                        fetch('http://192.168.10.115/panel/stats')
+                        .then(res => res.json())
+                        .then(json => console.log(json)) 
+                    </script>
+                    <img src="assets/img/homerequest.png" style="width:45px" ;>
+                </p>
             </div>
             <div class="col-25">
                 <h4 style="color: #e74c3c" ;>Requests Processing</h4>

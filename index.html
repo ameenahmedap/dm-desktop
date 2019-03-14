@@ -7,62 +7,77 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <script>
-function select(id1,id2) {
-    document.getElementById("homecontents").style.display = "none";
-    document.getElementById("requestcontents").style.display = "none";
-    document.getElementById("volunteercontents").style.display = "none";
-    document.getElementById('home').src = "assets/img/homeinactive.png";
-    document.getElementById('request').src = "assets/img/requestinactive.png";
-    document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
-    document.getElementById('btn1').style.borderLeft = "2px solid rgb(17, 17, 17)";
-    document.getElementById('btn2').style.borderLeft = "2px solid rgb(17, 17, 17)";
-    document.getElementById('btn3').style.borderLeft = "2px solid rgb(17, 17, 17)";
-    document.getElementById('btn1').style.backgroundColor = "rgb(17, 17, 17)";
-    document.getElementById('btn2').style.backgroundColor = "rgb(17, 17, 17)";    
-    document.getElementById('btn3').style.backgroundColor = "rgb(17, 17, 17)";  
+    function select(id1, id2) {
+        //document.getElementsByClassName("content").style.display = "none";
+        //var icons = document.querySelectorAll("home","request","volunteer","info");
+        //var buttons = document.querySelectorAll("btn1","btn2","btn3","btn4");
+        
+        //var i;
+        //for (i = 0; i < contents.length; i++) {
+        //    icons[i].src = "assets/img/" + icons[i] + "inactive.png";
+        //    buttons[i].style.borderLeft = "2px solid rgb(17, 17, 17)";
+        //    buttons[i].style.backgroundColor = "rgb(17, 17, 17)";
+        //}
+        // need complete revamp
+        document.getElementById("homecontents").style.display = "none";
+        document.getElementById("requestcontents").style.display = "none";
+        document.getElementById("volunteercontents").style.display = "none";
+        document.getElementById("infocontents").style.display = "none";
+        document.getElementById('home').src = "assets/img/homeinactive.png";
+        document.getElementById('request').src = "assets/img/requestinactive.png";
+        document.getElementById('volunteer').src = "assets/img/volunteerinactive.png";
+        document.getElementById('info').src = "assets/img/infoinactive.png";
+        document.getElementById('btn1').style.borderLeft = "2px solid rgb(17, 17, 17)";
+        document.getElementById('btn2').style.borderLeft = "2px solid rgb(17, 17, 17)";
+        document.getElementById('btn3').style.borderLeft = "2px solid rgb(17, 17, 17)";
+        document.getElementById('btn4').style.borderLeft = "2px solid rgb(17, 17, 17)";
+        document.getElementById('btn1').style.backgroundColor = "rgb(17, 17, 17)";
+        document.getElementById('btn2').style.backgroundColor = "rgb(17, 17, 17)";
+        document.getElementById('btn3').style.backgroundColor = "rgb(17, 17, 17)";
+        document.getElementById('btn4').style.backgroundColor = "rgb(17, 17, 17)";
 
-    document.getElementById(id1+"contents").style.display = "block";
-    document.getElementById(id2).style.backgroundColor = "rgb(27, 27, 27)";
-    document.getElementById(id2).style.borderLeft = "2px solid cyan";
-    document.getElementById(id1).src = "assets/img/"+id1+"active.png";
-}
-function time(id) {
-    date = new Date;
-    m = date.getMinutes();
-    s = date.getSeconds();
-     ampm = "AM";
-    h = date.getHours();
-    if(h>12)
-    {
-        h = h-12;
-        ampm="PM"
+        document.getElementById(id1 + "contents").style.display = "block";
+        document.getElementById(id2).style.backgroundColor = "rgb(27, 27, 27)";
+        document.getElementById(id2).style.borderLeft = "2px solid cyan";
+        document.getElementById(id1).src = "assets/img/" + id1 + "active.png";
     }
-    h = checkTime(h);
-    m = checkTime(m);
-    s = checkTime(s);
-    function checkTime(i) {
-        if (i < 10) {i = "0" + i};  
-        return i;
+    function time(id) {
+        date = new Date;
+        m = date.getMinutes();
+        s = date.getSeconds();
+        ampm = "AM";
+        h = date.getHours();
+        if (h > 12) {
+            h = h - 12;
+            ampm = "PM"
+        }
+        h = checkTime(h);
+        m = checkTime(m);
+        s = checkTime(s);
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };
+            return i;
+        }
+        result = '' + h + ':' + m + ':' + s + " " + ampm;
+        document.getElementById(id).innerHTML = result;
+        setTimeout('time("' + id + '");', '1000');
+        return true;
     }
-    result = ''+h+':'+m+':'+s+" "+ampm;
-    document.getElementById(id).innerHTML = result;
-    setTimeout('time("'+id+'");','1000');
-    return true;
-}
-function todaydate(id) {
-    today = new Date;
-    days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-    months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
-    year = today.getFullYear();
-    month = today.getMonth();
-    d = today.getDate();
-    day = today.getDay();
-    result = ''+days[day]+', '+d+' '+months[month]+' '+year;
-    document.getElementById(id).innerHTML = result;
-    setTimeout('todaydate("'+id+'");','1000');
-    return true;
-}
+    function todaydate(id) {
+        today = new Date;
+        days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+        months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+        year = today.getFullYear();
+        month = today.getMonth();
+        d = today.getDate();
+        day = today.getDay();
+        result = '' + days[day] + ', ' + d + ' ' + months[month] + ' ' + year;
+        document.getElementById(id).innerHTML = result;
+        setTimeout('todaydate("' + id + '");', '1000');
+        return true;
+    }
 </script>
+
 <body>
     <div class="header">
         <div class="header1">
@@ -90,20 +105,17 @@ function todaydate(id) {
             <img id="volunteer" src="assets/img/volunteerinactive.png" width="40%"><br>
             VOLUNTEERS
         </button>
+        <button onclick="select('info','btn4')" id="btn4">
+            <img id="info" src="assets/img/infoinactive.png" width="40%"><br>
+            INFORMATION CENTRE
+        </button>
     </div>
 
     <div class="main">
-        <div id="homecontents">
+        <div id="homecontents" class="content">
             <div class="col-25">
                 <h4 style="color: #e74c3c" ;>Requests Recieved</h4>
-                <p>
-                    <script>
-                        fetch('http://192.168.10.115/panel/stats')
-                        .then(res => res.json())
-                        .then(json => console.log(json)) 
-                    </script>
-                    <img src="assets/img/homerequest.png" style="width:45px" ;>
-                </p>
+                <p>700<img src="assets/img/homerequest.png" style="width:45px" ;></p>
             </div>
             <div class="col-25">
                 <h4 style="color: #e74c3c" ;>Requests Processing</h4>
@@ -118,14 +130,46 @@ function todaydate(id) {
                 <p>100 <img src="assets/img/homerequest.png" style="width:45px" ;></p>
             </div>
         </div>
-        <div id="requestcontents" style="display:none">
-            <p>hello</p>
+        <div id="requestcontents" style="display:none" class="content">
+            <p>All the request details
+                <div id="output">
+                    <script>
+                        fetch('http://192.168.10.115/panel/stats')
+                            .then((res) => res.json())
+                            .then((data) => {
+                                console.log(data);
+                                let output = 'Request Details';
+                                data.forEach(function(user) {
+                                    output += `<div>
+                                            <p>Requests: ${user.success.total}</p>
+                                        </div>`;
+                                });
+                                document.getElementById('output').innerHTML = output;
+                            })
+                            .catch(function (error) {
+                                console.log(JSON.stringify(error));
+                            });
+                    </script>
+                </div>
+            </p>
         </div>
-        <div id="volunteercontents" style="display:none">
-            <p>hi</p>
+        <div id="volunteercontents" style="display:none" class="content">
+            <p>List of all the volunteers</p>
+        </div>
+        <div id="infocontents" style="display:none" class="content">
+            <p style="text-align:center;font-size:24pt">INFORMATION CENTRE</p>
+            
+            <p>Information Title</p>
+            <input type="text" placeholder="Enter the news title"></input><br>
+            <textarea placeholder="Enter the news content"></textarea>
+	    <br/>
+        	<input type ="radio" class="priority"/>High
+	    </br><input type="radio" class="priority"/>Low
+	    <br/>
+	    <input type="submit"/>
         </div>
     </div>
-    
+
 </body>
 
 </html>

@@ -82,5 +82,61 @@ body{
   box-shadow: 1px 2px 5px grey;
 }
 .col-25 p {
-  font-size: 38pt;
+  font-size: 18pt;
+}
+.infowindow {
+  width: 100%;
+}
+.infocontainer {
+  text-align: center;
+  margin:4px 8px;
+  border: #111 solid 1px;
+  border-radius: 5px;
+  width: 30%;
+  float: left;
+}
+.previnfo {
+  border: #111 solid 1px;
+  float: left;
+  height: 80vh;
+  width: 65%;
+  margin:4px 8px;
+  text-align: center;
+}
+textarea {
+  width: 90%;
+  height: 100px;
+}
+input[type=text] {
+  width: 90%;
+  padding:5px;
+}
+input[type=submit] {
+  background-color: rgb(76, 172, 175);
+  border: none;
+  border-radius:15px;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.volcontainer {
+  width: 100%;
+}
+.activevol {
+  text-align: center;
+  border: #111 solid 1px;
+  margin: 4px 2px;
+  width: 48%;
+  height: 80vh;
+  float: left;
+}
+.vollist {
+  text-align: center;
+  border: #111 solid 1px;
+  margin: 4px 2px;
+  width: 48%;
+  float: left;
+  height: 80vh;
 }

@@ -5,6 +5,8 @@
     <title>Control Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <script>
     function select(id1, id2) {
@@ -77,93 +79,133 @@
         return true;
     }
     function requestData1(req,id) {
-            var obj, dbParam, xmlhttp, myObj, x, txt = "";
-            obj = { table: "customers", limit: 20 };
+            var obj, dbParam, xmlhttp, myObj, x, txt;
             dbParam = JSON.stringify(obj);
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     myObj = JSON.parse(this.responseText);
-                    var table = "<tr><th>Name</th><th>Location</th></tr>";
-                    txt += "<table border='1'>"
                     for (x in myObj) {
-                        txt += "<tr><td>" + myObj[x].total + "</td></td>";
+                        txt = myObj[x].total;
                     }
-                    txt += "</table>"
                     document.getElementById(id).innerHTML = txt;
                 }
             };
 
-            xmlhttp.open("GET", "http://localhost:8000/panel/stats", true);
+            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
         function requestData2(req,id) {
-            var obj, dbParam, xmlhttp, myObj, x, txt = "";
-            obj = { table: "customers", limit: 20 };
+            var obj, dbParam, xmlhttp, myObj, x, txt;
             dbParam = JSON.stringify(obj);
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     myObj = JSON.parse(this.responseText);
-                    var table = "<tr><th>Name</th><th>Location</th></tr>";
-                    txt += "<table border='1'>"
                     for (x in myObj) {
-                        txt += "<tr><td>" + myObj[x].processing + "</td></td>";
+                        txt = myObj[x].processing;
                     }
-                    txt += "</table>"
                     document.getElementById(id).innerHTML = txt;
                 }
             };
 
-            xmlhttp.open("GET", "http://localhost:8000/panel/stats", true);
+            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
         function requestData3(req,id) {
-            var obj, dbParam, xmlhttp, myObj, x, txt = "";
-            obj = { table: "customers", limit: 20 };
+            var obj, dbParam, xmlhttp, myObj, x, txt;
             dbParam = JSON.stringify(obj);
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     myObj = JSON.parse(this.responseText);
-                    var table = "<tr><th>Name</th><th>Location</th></tr>";
-                    txt += "<table border='1'>"
                     for (x in myObj) {
-                        txt += "<tr><td>" + myObj[x].completed + "</td></td>";
+                        txt = myObj[x].completed;
                     }
-                    txt += "</table>"
                     document.getElementById(id).innerHTML = txt;
                 }
             };
 
-            xmlhttp.open("GET", "http://localhost:8000/panel/stats", true);
+            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
         function requestData4(req,id) {
-            var obj, dbParam, xmlhttp, myObj, x, txt = "";
+            var obj, dbParam, xmlhttp, myObj, x, txt;
             obj = { table: "customers", limit: 20 };
             dbParam = JSON.stringify(obj);
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     myObj = JSON.parse(this.responseText);
-                    var table;
-                    txt += "<table border='1'>"
                     for (x in myObj) {
-                        txt += "<tr><td>" + myObj[x].pending + "</td></tr>";
+                        txt = myObj[x].pending;
                     }
-                    txt += "</table>"
+                    document.getElementById(id).innerHTML = txt;
+                }
+            };//output
+
+            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
+            //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("x=" + dbParam);
+        }
+
+        function previnfos(id) {
+            var obj, dbParam, xmlhttp, myObj, x, txt;
+            dbParam = JSON.stringify(obj);
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myObj = JSON.parse(this.responseText);
+                    for (x in myObj) {
+                        txt = myObj[x].title;
+                    }
                     document.getElementById(id).innerHTML = txt;
                 }
             };
 
-            xmlhttp.open("GET", "http://localhost:8000/panel/stats", true);
+            xmlhttp.open("GET", "http://192.168.10.115/panel/news", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
+        $(document).ready(function () {
+                $("#submit").click(function () {
+                    var newstitle = $("#newstitle").val();
+                    var content = $("#newscontent").val();
+                    var newspriority = $("input[name='priority']:checked").val();
+
+                    var myObj = {
+                        title: newstitle,
+                        body: content,
+                        priority: newspriority,
+                    };
+                    console.log(myObj.title);
+                    console.log(myObj.body);
+                    console.log(myObj.priority);
+                    // if(name1==''||email1==''||college1==''||phone1=='')
+                    // {
+                    //   alert("Please fill all the fields")
+                    // }
+                    //else
+                    //{
+                    var myjson = JSON.stringify(myObj);
+                    xhr = new XMLHttpRequest();
+                    xhr.open("POST", "http://192.168.10.115/panel/news", true);
+                    xhr.setRequestHeader("Content-type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var json = JSON.parse(xhr.responseText);
+                        }
+                    }
+                    var data = JSON.stringify(myObj);
+                    xhr.send(myjson);
+                    alert("New information added");
+                    //}
+                });
+            });
+
 </script>
 
 <body>
@@ -205,7 +247,7 @@
                 <h4 style="color: #e74c3c" ;>Requests Recieved</h4>
                 <p>
                     <span id="demo1" style="text-align:center"></span>
-                    <script type="text/javascript">window.onload = requestData1('total','demo1');</script>
+                    <script type="text/javascript">window.onload = requestData1('total','demo1');</script><br>
                     <img src="assets/img/homerequest.png" style="width:45px" ;>
                 </p>
             </div>
@@ -213,21 +255,21 @@
                 <h4 style="color: #e74c3c" ;>Requests Processing</h4>
                 <p>
                     <span id="demo2"></span>
-                    <script type="text/javascript">window.onload = requestData2('processing','demo2');</script>
+                    <script type="text/javascript">window.onload = requestData2('processing','demo2');</script><br>
                     <img src="assets/img/homerequest.png" style="width:45px" ;></p>
             </div>
             <div class="col-25">
                 <h4 style="color: #e74c3c" ;>Requests Completed</h4>
                 <p>
                     <span id="demo3"></span>
-                    <script type="text/javascript">window.onload = requestData3('completed','demo3');</script>
+                    <script type="text/javascript">window.onload = requestData3('completed','demo3');</script><br>
                     <img src="assets/img/homerequest.png" style="width:45px" ;></p>
             </div>
             <div class="col-25">
                 <h4 style="color: #e74c3c" ;>Requests Pending</h4>
                 <p>
                     <span id="demo4"></span>
-                    <script type="text/javascript">window.onload = requestData4('pending','demo4');</script>
+                    <script type="text/javascript">window.onload = requestData4('pending','demo4');</script><br>
                     <img src="assets/img/homerequest.png" style="width:45px" ;></p>
             </div>
         </div>
@@ -235,22 +277,18 @@
             <p  style="text-align:center;font-size:24pt">REQUESTS
                 <div id="output">
                     <script>
-                        fetch('http://localhost:8000/panel/stats')
-                            .then((res) => res.json())
-                            .then((data) => {
-                                console.log(data);
-                                document.getElementById('output').innerHTML = data;
-                                let output = 'Request Details';
-                                data.forEach(function(user) {
-                                    output += `<div>
-                                            <p>Requests: ${user.total}</p>
-                                        </div>`;
-                                });
-                                document.getElementById('output').innerHTML = output;
-                            })
-                            .catch(function (error) {
-                                console.log(JSON.stringify(error));
-                            });
+                        // fetch('http://192.168.10.115/victim/requests',100)
+                        //     .then((res) => res.json())
+                        //     .then((data) => {
+                        //         console.log(data);
+                        //         //document.getElementById('output').innerHTML = data.result;
+                        //         //let output = 'Request Details';
+                                
+                        //         //document.getElementById('output').innerHTML = output;
+                        //     })
+                        //     .catch(function (error) {
+                        //         console.log(JSON.stringify(error));
+                        //     });
                     </script>
                 </div>
             </p>
@@ -271,16 +309,46 @@
             <div class="infowindow">
                 <div class="infocontainer">
                     <p>Information Title</p>
-                    <input type="text" placeholder="Enter the news title"></input><br><br>
-                    <textarea placeholder="Enter the news content"></textarea>
+                    <div class="form-group">
+                        <input type="text" id="newstitle" placeholder="Enter the news title"></input><br><br></div>
+                    <div class="form-group">
+                        <textarea id="newscontent" placeholder="Enter the news content"></textarea></div>
                     <br>
-                    <input type="radio" name="priority" />High
-                    <input type="radio" name="priority" />Low
+                    <input type="radio" name="priority" value=2 checked />High
+                    <input type="radio" name="priority" value=1 />Low
                     <br>
-                    <input type="submit" />
+                    <input type="submit" id="submit" />
                 </div>
                 <div class="previnfo">
                     <p>Previous Informations</p>
+                    <span id="previnfo"></span>
+                    <!-- <script type="text/javascript">window.onload = previnfos('previnfo');</script><br> -->
+                    <script>
+                        fetch('http://192.168.10.115/panel/news')
+                            .then((res) => res.json())
+                            .then((data) => {
+                                console.log(data);
+                                //let output ;
+                                let output = `<table border='1'><tr><th>Priority</th><th>Title</th><th>Content</th></tr>`;
+                                data.result.forEach(function (user) {
+                                    console.log(user.priority);
+                                    console.log(user.heading);
+                                    console.log(user.body);
+                                    output += `<span>
+                                        <tr>
+                                            <td>${user.priority}</td>
+                                            <td>${user.heading}</td>
+                                            <td>${user.body}</td>
+                                        </tr>
+                                </span>`;
+                                });
+                                output += `</table>`;
+                                document.getElementById('previnfo').innerHTML = output;
+                            })
+                            .catch(function (error) {
+                                console.log(JSON.stringify(error));
+                            });
+                    </script>
                 </div>
             </div>
         </div>

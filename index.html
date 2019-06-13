@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <script>
     function select(id1, id2) {
@@ -65,6 +67,35 @@
         setTimeout('time("' + id + '");', '1000');
         return true;
     }
+    function info(id) {
+            fetch('http://e2015f02.ngrok.io/panel/news')
+                .then((res) => res.json())
+                .then((data) => {
+                    //console.log(data);
+                    //let output ;
+                    let output = `<table class='table'><thead><tr><th>Priority</th><th>Title</th><th>Content</th></tr></thead>`;
+                    data.result.forEach(function (user) {
+                        //console.log(user.priority);
+                        //console.log(user.heading);
+                        //console.log(user.body);
+                        output += `<span>
+                                        <tbody>
+                                        <tr>
+                                            <td>${user.priority}</td>
+                                            <td>${user.heading}</td>
+                                            <td>${user.body}</td>
+                                        </tr>
+                                        </tbody>
+                                </span>`;
+                    });
+                    output += `</table>`;
+                    document.getElementById(id).innerHTML = output;
+                    setTimeout('info("' + id + '");', '1000');
+                })
+                .catch(function (error) {
+                    console.log(JSON.stringify(error));
+                });
+        }
     function todaydate(id) {
         today = new Date;
         days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
@@ -92,11 +123,11 @@
                 }
             };
 
-            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
+            xmlhttp.open("GET", "http://e2015f02.ngrok.io/panel/stats", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
-        function requestData2(req,id) {
+    function requestData2(req,id) {
             var obj, dbParam, xmlhttp, myObj, x, txt;
             dbParam = JSON.stringify(obj);
             xmlhttp = new XMLHttpRequest();
@@ -110,11 +141,11 @@
                 }
             };
 
-            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
+            xmlhttp.open("GET", "http://e2015f02.ngrok.io/panel/stats", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
-        function requestData3(req,id) {
+    function requestData3(req,id) {
             var obj, dbParam, xmlhttp, myObj, x, txt;
             dbParam = JSON.stringify(obj);
             xmlhttp = new XMLHttpRequest();
@@ -128,11 +159,11 @@
                 }
             };
 
-            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
+            xmlhttp.open("GET", "http://e2015f02.ngrok.io/panel/stats", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
-        function requestData4(req,id) {
+    function requestData4(req,id) {
             var obj, dbParam, xmlhttp, myObj, x, txt;
             obj = { table: "customers", limit: 20 };
             dbParam = JSON.stringify(obj);
@@ -147,12 +178,12 @@
                 }
             };//output
 
-            xmlhttp.open("GET", "http://192.168.10.115/panel/stats", true);
+            xmlhttp.open("GET", "http://e2015f02.ngrok.io/panel/stats", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
 
-        function previnfos(id) {
+    function previnfos(id) {
             var obj, dbParam, xmlhttp, myObj, x, txt;
             dbParam = JSON.stringify(obj);
             xmlhttp = new XMLHttpRequest();
@@ -166,11 +197,11 @@
                 }
             };
 
-            xmlhttp.open("GET", "http://192.168.10.115/panel/news", true);
+            xmlhttp.open("GET", "http://e2015f02.ngrok.io/panel/news", true);
             //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("x=" + dbParam);
         }
-        $(document).ready(function () {
+    $(document).ready(function () {
                 $("#submit").click(function () {
                     var newstitle = $("#newstitle").val();
                     var content = $("#newscontent").val();
@@ -181,9 +212,9 @@
                         body: content,
                         priority: newspriority,
                     };
-                    console.log(myObj.title);
-                    console.log(myObj.body);
-                    console.log(myObj.priority);
+                    //console.log(myObj.title);
+                    //console.log(myObj.body);
+                    //console.log(myObj.priority);
                     // if(name1==''||email1==''||college1==''||phone1=='')
                     // {
                     //   alert("Please fill all the fields")
@@ -192,7 +223,7 @@
                     //{
                     var myjson = JSON.stringify(myObj);
                     xhr = new XMLHttpRequest();
-                    xhr.open("POST", "http://192.168.10.115/panel/news", true);
+                    xhr.open("POST", "http://e2015f02.ngrok.io/panel/news", true);
                     xhr.setRequestHeader("Content-type", "application/json");
                     xhr.onreadystatechange = function () {
                         if (this.readyState == 4 && this.status == 200) {
@@ -241,7 +272,7 @@
         </button>
     </div>
 
-    <div class="main">
+    <div class="main" class="table-responsive">
         <div id="homecontents" class="content">
             <div class="col-25">
                 <h4 style="color: #e74c3c" ;>Requests Recieved</h4>
@@ -276,19 +307,52 @@
         <div id="requestcontents" style="display:none" class="content">
             <p  style="text-align:center;font-size:24pt">REQUESTS
                 <div id="output">
-                    <script>
-                        // fetch('http://192.168.10.115/victim/requests',100)
+                    <!--<script>
+                        // fetch('http://e2015f02.ngrok.io/victim/requests?limit=100')
                         //     .then((res) => res.json())
                         //     .then((data) => {
                         //         console.log(data);
+                        //         let i = 0;
+                        //         console.log(data.result[i].name);
                         //         //document.getElementById('output').innerHTML = data.result;
-                        //         //let output = 'Request Details';
-                                
-                        //         //document.getElementById('output').innerHTML = output;
+                        //         let output = 'Request Details';
+                        //         data.forEach(function (user) {
+                        //             output += `<div>
+                        //         <p>Requests: ${data.user[i].name}</p>
+                        //         </div>`;
+                        //         });
+                        //         document.getElementById('output').innerHTML = output;
                         //     })
                         //     .catch(function (error) {
                         //         console.log(JSON.stringify(error));
                         //     });
+                    </script>-->
+                    <script>
+                        var obj, dbParam, xmlhttp, myObj, x, req;
+                        dbParam = JSON.stringify(obj);
+                        xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200) {
+                                myObj = JSON.parse(this.responseText);
+                                console.log(myObj);
+                                console.log(myObj.result.length);
+                                req += "<table class='table'>";
+                                req += "<thead><tr><th>Name</th><th>Phone</th><th>Location</th></tr></thead>";
+                                 for (let i=0;i<(myObj.result.length);i++) {
+                                    //console.log(myObj.result[3]);
+                                    //req = myObj.result[i].name;
+                                    req += "<tbody><tr><td>" + myObj.result[i].name + "</td>";
+                                    req += "<td>" + myObj.result[i].phone + "</td>";
+                                    req += "<td>" + myObj.result[i].location + "</td></tr></tbody>";
+                                 }
+                                 req += "</table>";
+                                document.getElementById('output').innerHTML = req;
+                            }
+                        };
+
+                        xmlhttp.open("GET", "http://e2015f02.ngrok.io/victim/requests?limit=100", true);
+                        //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xmlhttp.send("x=" + dbParam);
                     </script>
                 </div>
             </p>
@@ -296,11 +360,68 @@
         <div id="volunteercontents" style="display:none" class="content">
             <p style="text-align:center;font-size:24pt">VOLUNTEERS</p>
             <div class="volcontainer">
-                <div class="vollist" id="demo">
-                    <p>Registered volunteers</p>
+                <div class="vollist">
+                    <h3 style="text-align: center">Registered volunteers</h3>
+                    <div id="demo">
+                    <script>
+                    var obj, dbParam, xmlhttp, myObj, x, vol;
+                        dbParam = JSON.stringify(obj);
+                        xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200) {
+                                myObj = JSON.parse(this.responseText);
+                                console.log(myObj.allReq);
+                                vol += "<table class='table'>";
+                                vol += "<thead><tr><th>Name</th><th>Phone</th></tr></thead>";
+                                  for (let i=0;i<(myObj.allReq.length);i++) {
+                                     //console.log(myObj.result[3]);
+                                     //vol = myObj.result[i].name;
+                                     vol += "<tbody><tr><td>" + myObj.allReq[i].name + "</td>";
+                                     vol += "<td>" + myObj.allReq[i].phone + "</td></tr></tbody>";
+                                  }
+                                 vol += "</table>";
+                                document.getElementById('demo').innerHTML = vol;
+                            }
+                        };
+
+                        xmlhttp.open("GET", "http://e2015f02.ngrok.io/volunteer/list", true);
+                        //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xmlhttp.send("x=" + dbParam);
+                    </script>
+                    </div>
                 </div>
                 <div class="activevol">
-                    <p>Active volunteers</p>
+                    <h3 style="text-align: center">Active volunteers</h3>
+                    <div id="active">
+                    <script>
+                    var obj, dbParam, xmlhttp, myObj, x, actvol;
+                        dbParam = JSON.stringify(obj);
+                        xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200) {
+                                myObj = JSON.parse(this.responseText);
+                                console.log(myObj.selectReq);
+                                actvol += "<table class='table'>";
+                                        actvol += "<thead><tr><th>Volunteer Name</th><th>Volunteer Phone</th><th>Location</th><th>Victim Name</th><th>Victim Phone</th></tr></thead>";
+                                  for (let i=0;i<(myObj.selectReq.length);i++) {
+                                     //console.log(myObj.result[3]);
+                                     //actvol = myObj.result[i].name;
+                                     actvol += "<tbody><tr><td>" + myObj.selectReq[i].volname + "</td>";
+                                     actvol += "<td>" + myObj.selectReq[i].volphone + "</td>";
+                                     actvol += "<td>" + myObj.selectReq[i].location + "</td>";
+                                     actvol += "<td>" + myObj.selectReq[i].vicname + "</td>";
+                                     actvol += "<td>" + myObj.selectReq[i].viphone + "</td></tr></tbody>";
+                                  }
+                                  actvol += "</table>";
+                                document.getElementById('active').innerHTML = actvol;
+                            }
+                        };
+
+                        xmlhttp.open("GET", "http://e2015f02.ngrok.io/volunteer/list", true);
+                        //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xmlhttp.send("x=" + dbParam);
+                    </script>
+                    </div>
                 </div>
             </div>
         </div>
@@ -308,7 +429,7 @@
             <p style="text-align:center;font-size:24pt">INFORMATION CENTRE</p>
             <div class="infowindow">
                 <div class="infocontainer">
-                    <p>Information Title</p>
+                    <h3 style="text-align: center">Information Title</h3>
                     <div class="form-group">
                         <input type="text" id="newstitle" placeholder="Enter the news title"></input><br><br></div>
                     <div class="form-group">
@@ -320,35 +441,10 @@
                     <input type="submit" id="submit" />
                 </div>
                 <div class="previnfo">
-                    <p>Previous Informations</p>
+                    <h3 style="text-align: center">Previous Informations</h3>
                     <span id="previnfo"></span>
                     <!-- <script type="text/javascript">window.onload = previnfos('previnfo');</script><br> -->
-                    <script>
-                        fetch('http://192.168.10.115/panel/news')
-                            .then((res) => res.json())
-                            .then((data) => {
-                                console.log(data);
-                                //let output ;
-                                let output = `<table border='1'><tr><th>Priority</th><th>Title</th><th>Content</th></tr>`;
-                                data.result.forEach(function (user) {
-                                    console.log(user.priority);
-                                    console.log(user.heading);
-                                    console.log(user.body);
-                                    output += `<span>
-                                        <tr>
-                                            <td>${user.priority}</td>
-                                            <td>${user.heading}</td>
-                                            <td>${user.body}</td>
-                                        </tr>
-                                </span>`;
-                                });
-                                output += `</table>`;
-                                document.getElementById('previnfo').innerHTML = output;
-                            })
-                            .catch(function (error) {
-                                console.log(JSON.stringify(error));
-                            });
-                    </script>
+                    <script type="text/javascript">window.onload = info('previnfo');</script>
                 </div>
             </div>
         </div>
